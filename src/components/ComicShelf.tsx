@@ -147,18 +147,14 @@ export default function ComicShelf() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden flex items-center justify-center">
       {/* Immagine della libreria fissa */}
       <div 
-        className="relative mx-auto"
+        className="relative"
         style={{
           width: '100%',
           maxWidth: '960px',
           aspectRatio: `${SHELF_CONFIG.libraryImage.width} / ${SHELF_CONFIG.libraryImage.height}`,
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)'
         }}
       >
         <img 
@@ -171,13 +167,8 @@ export default function ComicShelf() {
 
       {/* Container per i fumetti con zoom */}
       <motion.div 
-        className="relative w-full h-full"
+        className="absolute inset-0 flex items-center justify-center"
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
           pointerEvents: 'none'
         }}
       >

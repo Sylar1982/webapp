@@ -33,10 +33,10 @@ const SHELF_CONFIG = {
       coordinates: {
         x: 356,
         y: 344,
-        shelfWidth: 180  // Larghezza totale dello scaffale
+        shelfWidth: 250  // Aumentata la larghezza dello scaffale
       },
       height: 88,       // Altezza dei fumetti
-      width: 15,        // Aumentata la larghezza dei fumetti
+      width: 25,        // Aumentata la larghezza dei fumetti
       maxComics: 3      // Impostato il massimo a 3 fumetti
     }
   ]
@@ -111,10 +111,8 @@ export default function ComicShelf() {
 
   // Organizza i fumetti per scaffale
   const comicsByShelf = comics.reduce((acc, comic) => {
-    const shelfIndex = Math.min(
-      Math.floor((comic.position) / SHELF_CONFIG.shelves[0].maxComics),
-      SHELF_CONFIG.shelves.length - 1
-    );
+    // Assegniamo tutti i fumetti allo scaffale 0 per ora
+    const shelfIndex = 0;
     if (!acc[shelfIndex]) {
       acc[shelfIndex] = [];
     }

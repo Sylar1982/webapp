@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.bg-wood-texture {
+  background-color: #8B4513;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* Effetto ombra per i fumetti */
+.comic-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    2px 0 8px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Effetto hover per i fumetti */
+.comic-hover {
+  transition: all 0.3s ease;
+}
+
+.comic-hover:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    2px 0 12px -2px rgba(0, 0, 0, 0.1);
+} 

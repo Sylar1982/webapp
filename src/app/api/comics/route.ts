@@ -23,13 +23,15 @@ export async function GET() {
       return acc;
     }, {});
 
+    const basePath = process.env.NODE_ENV === 'production' ? '/webapp' : '';
+
     // Crea l'array di fumetti
     const comics = Object.values(comicsByID).map((comic: any, index: number) => ({
       id: comic.id,
       title: comic.title,
-      spineImage: `/images/Comics/${comic.files.COS}`,
-      coverImage: comic.files.COP ? `/images/Comics/${comic.files.COP}` : `/images/Comics/${comic.files.COS}`,
-      filePath: comic.files.COP ? `/images/Comics/${comic.files.COP}` : `/images/Comics/${comic.files.COS}`,
+      spineImage: `${basePath}/images/Comics/${comic.files.COS}`,
+      coverImage: comic.files.COP ? `${basePath}/images/Comics/${comic.files.COP}` : `${basePath}/images/Comics/${comic.files.COS}`,
+      filePath: comic.files.COP ? `${basePath}/images/Comics/${comic.files.COP}` : `${basePath}/images/Comics/${comic.files.COS}`,
       shelf: 0,
       position: index
     }));

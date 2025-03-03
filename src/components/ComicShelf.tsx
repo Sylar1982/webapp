@@ -156,7 +156,7 @@ export default function ComicShelf() {
         }}
       >
         <img 
-          src="/images/libreria-design.jpg"
+          src={process.env.NODE_ENV === 'production' ? '/webapp/images/libreria-design.jpg' : '/images/libreria-design.jpg'}
           alt="Libreria"
           className="w-full h-full object-contain"
           id="libraryImage"

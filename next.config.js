@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/webapp',
+  basePath: process.env.NODE_ENV === 'production' ? '/webapp' : '',
+  output: 'standalone',
   images: {
     unoptimized: true
   }

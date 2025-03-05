@@ -1,0 +1,19 @@
+{
+  "comics": [
+    {
+      "id": "0001",
+      "title": "Vendicatori 1",
+      "file": "http://www.gamecaffe.net/Comics/0001_Vendicatori_001.cbz"
+    },
+    {
+      "id": "0002",
+      "title": "Vendicatori 2",
+      "file": null
+    },
+    {
+      "id": "0003",
+      "title": "Omnibus Rom 01",
+      "file": null
+    }
+  ]
+} 

@@ -7,6 +7,10 @@ export async function GET() {
     const comicsDir = path.join(process.cwd(), 'public', 'images', 'Comics');
     const files = fs.readdirSync(comicsDir);
     
+    // Leggi il file JSON con i dati dei fumetti
+    const comicsDataPath = path.join(process.cwd(), 'public', 'comics-data.json');
+    const comicsData = JSON.parse(fs.readFileSync(comicsDataPath, 'utf-8'));
+    
     // Raggruppa i file per ID
     const comicsByID = files.reduce((acc: { [key: string]: any }, file: string) => {
       // Regex più flessibile che accetta qualsiasi carattere tra COS/COP e .jpg
@@ -23,16 +27,23 @@ export async function GET() {
       return acc;
     }, {});
 
+    const basePath = process.env.NODE_ENV === 'production' ? '/webapp' : '';
+
     // Crea l'array di fumetti
-    const comics = Object.values(comicsByID).map((comic: any, index: number) => ({
-      id: comic.id,
-      title: comic.title,
-      spineImage: `/images/Comics/${comic.files.COS}`,
-      coverImage: comic.files.COP ? `/images/Comics/${comic.files.COP}` : `/images/Comics/${comic.files.COS}`,
-      filePath: comic.files.COP ? `/images/Comics/${comic.files.COP}` : `/images/Comics/${comic.files.COS}`,
-      shelf: 0,
-      position: index
-    }));
+    const comics = Object.values(comicsByID).map((comic: any, index: number) => {
+      // Trova il file corrispondente nel JSON
+      const comicData = comicsData.comics.find((c: any) => c.id === comic.id);
+      
+      return {
+        id: comic.id,
+        title: comic.title,
+        spineImage: `${basePath}/images/Comics/${comic.files.COS}`,
+        coverImage: comic.files.COP ? `${basePath}/images/Comics/${comic.files.COP}` : `${basePath}/images/Comics/${comic.files.COS}`,
+        filePath: comicData ? `${basePath}${comicData.file}` : null,
+        shelf: 0,
+        position: index
+      };
+    });
 
     console.log('Files trovati:', files);
     console.log('Comics raggruppati:', comicsByID);

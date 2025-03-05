@@ -240,7 +240,7 @@ export default function ComicShelf() {
                 }}
                 animate={{
                   scale: isShelfSelected ? 2 : 1,
-                  y: isShelfSelected ? -shelf.coordinates.y / 4 : 0
+                  y: isShelfSelected ? shelf.height * 1.5 : 0
                 }}
                 transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 onClick={(e) => {
@@ -329,9 +329,9 @@ export default function ComicShelf() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    console.log('Opening:', selectedComic.filePath);
+                    window.open(`/api/download?id=${selectedComic.id}`, '_blank');
                   }}
-                  className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   Leggi
                 </button>

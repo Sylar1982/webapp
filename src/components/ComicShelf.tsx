@@ -48,6 +48,14 @@ export default function ComicShelf() {
   const [comics, setComics] = useState<Comic[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
+  // Aggiungo un useEffect per il logging del fumetto selezionato
+  useEffect(() => {
+    if (selectedComic) {
+      console.log('Dati del fumetto selezionato:', selectedComic);
+      console.log('File del fumetto:', selectedComic.file);
+    }
+  }, [selectedComic]);
+
   // Gestisce il ridimensionamento della finestra
   useEffect(() => {
     function handleResize() {
@@ -358,21 +366,18 @@ export default function ComicShelf() {
                   className="w-full h-auto rounded shadow-lg"
                 />
                 <h2 className="text-2xl font-bold mt-6 mb-4">{selectedComic.title}</h2>
-                {selectedComic.file && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      console.log('Apertura link:', selectedComic.file);
-                      if (selectedComic.file) {
-                        // Forza l'apertura in una nuova finestra con tutti i parametri necessari
-                        window.open(selectedComic.file, '_blank', 'noopener,noreferrer');
-                      }
-                    }}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
-                  >
-                    Leggi
-                  </button>
-                )}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log('Apertura link:', selectedComic.file);
+                    if (selectedComic.file) {
+                      window.open(selectedComic.file, '_blank', 'noopener,noreferrer');
+                    }
+                  }}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  Leggi
+                </button>
               </motion.div>
             </div>
           </motion.div>

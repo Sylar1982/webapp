@@ -39,7 +39,7 @@ export async function GET() {
         title: comic.title,
         spineImage: `${basePath}/images/Comics/${comic.files.COS}`,
         coverImage: comic.files.COP ? `${basePath}/images/Comics/${comic.files.COP}` : `${basePath}/images/Comics/${comic.files.COS}`,
-        filePath: comicData ? `${basePath}${comicData.file}` : null,
+        file: comicData ? comicData.file : null,
         shelf: 0,
         position: index
       };

@@ -286,7 +286,7 @@ export default function ComicShelf() {
                         whileHover={{ scale: isShelfSelected && !selectedComic ? 1.05 : 1 }}
                       >
                         <img 
-                          src={comic.spineImage}
+                          src={comic.spineImage.replace('/webapp/', '/')}
                           alt={comic.title}
                           className="h-full w-full object-fill"
                           style={{
@@ -321,7 +321,7 @@ export default function ComicShelf() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <img
-                  src={selectedComic.coverImage}
+                  src={selectedComic.coverImage.replace('/webapp/', '/')}
                   alt={selectedComic.title}
                   className="w-full h-auto rounded shadow-lg"
                 />

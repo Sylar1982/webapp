@@ -9,7 +9,7 @@ interface Comic {
   coverImage: string;
   spineImage: string;
   spineColor: string;
-  filePath: string;
+  file: string;
   shelf: number;
   position: number;
   dimensions?: {
@@ -361,7 +361,7 @@ export default function ComicShelf() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    window.open(`/api/download?id=${selectedComic.id}`, '_blank');
+                    window.open(selectedComic.file, '_blank');
                   }}
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
                 >

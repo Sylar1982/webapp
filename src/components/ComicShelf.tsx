@@ -67,7 +67,14 @@ export default function ComicShelf() {
     const loadImage = (src: string): Promise<HTMLImageElement> => {
       return new Promise((resolve, reject) => {
         const img = new Image();
-        img.onload = () => resolve(img);
+        img.onload = () => {
+          console.log(`Immagine caricata: ${src}`, {
+            naturalWidth: img.naturalWidth,
+            naturalHeight: img.naturalHeight,
+            aspectRatio: img.naturalWidth / img.naturalHeight
+          });
+          resolve(img);
+        };
         img.onerror = reject;
         img.src = src;
       });
@@ -77,13 +84,15 @@ export default function ComicShelf() {
       const comicsWithDimensions = await Promise.all(
         comicsData.map(async (comic) => {
           const img = await loadImage(comic.spineImage);
+          const dimensions = {
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+            aspectRatio: img.naturalWidth / img.naturalHeight
+          };
+          console.log(`Dimensioni salvate per ${comic.title}:`, dimensions);
           return {
             ...comic,
-            dimensions: {
-              width: img.naturalWidth,
-              height: img.naturalHeight,
-              aspectRatio: img.naturalWidth / img.naturalHeight
-            }
+            dimensions
           };
         })
       );
@@ -133,8 +142,15 @@ export default function ComicShelf() {
     // Se abbiamo le dimensioni dell'immagine, usa quelle per calcolare la larghezza proporzionale
     if (comic.dimensions) {
       // Calcoliamo la larghezza mantenendo l'aspect ratio dell'immagine originale
-      // ma riduciamo la larghezza di base a 1/3
-      const width = (baseHeight * comic.dimensions.aspectRatio) / 3;
+      const width = baseHeight * comic.dimensions.aspectRatio;
+      console.log(`Calcolo dimensioni per ${comic.title}:`, {
+        dimensions: comic.dimensions,
+        baseHeight,
+        width,
+        isZoomed,
+        finalWidth: width * baseMultiplier,
+        finalHeight: baseHeight * baseMultiplier
+      });
       return {
         height: baseHeight * baseMultiplier,
         width: width * baseMultiplier
@@ -142,9 +158,10 @@ export default function ComicShelf() {
     }
     
     // Fallback alle dimensioni di default se non abbiamo le dimensioni dell'immagine
+    console.warn(`Dimensioni non trovate per ${comic.title}, uso default`);
     return {
       height: baseHeight * baseMultiplier,
-      width: (shelf.width / 3) * baseMultiplier // Riduciamo anche la larghezza di default
+      width: shelf.width * baseMultiplier
     };
   };
 

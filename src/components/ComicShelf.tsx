@@ -358,15 +358,20 @@ export default function ComicShelf() {
                   className="w-full h-auto rounded shadow-lg"
                 />
                 <h2 className="text-2xl font-bold mt-6 mb-4">{selectedComic.title}</h2>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(selectedComic.file, '_blank');
-                  }}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
-                >
-                  Leggi
-                </button>
+                {selectedComic.file && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      console.log('Apertura link:', selectedComic.file);
+                      if (selectedComic.file) {
+                        window.location.href = selectedComic.file;
+                      }
+                    }}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+                  >
+                    Leggi
+                  </button>
+                )}
               </motion.div>
             </div>
           </motion.div>

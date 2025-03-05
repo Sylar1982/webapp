@@ -66,36 +66,49 @@ export default function ComicShelf() {
   const preloadImages = async (comicsData: Comic[]) => {
     const loadImage = (src: string): Promise<HTMLImageElement> => {
       return new Promise((resolve, reject) => {
+        console.log('Tentativo di caricamento immagine:', src);
         const img = new Image();
         img.onload = () => {
-          console.log(`Immagine caricata: ${src}`, {
+          console.log(`✅ Immagine caricata con successo: ${src}`, {
             naturalWidth: img.naturalWidth,
             naturalHeight: img.naturalHeight,
             aspectRatio: img.naturalWidth / img.naturalHeight
           });
           resolve(img);
         };
-        img.onerror = reject;
-        img.src = src;
+        img.onerror = (error) => {
+          console.error(`❌ Errore nel caricamento dell'immagine: ${src}`, error);
+          reject(error);
+        };
+        // Rimuoviamo /webapp/ dall'URL dell'immagine se presente
+        img.src = src.replace('/webapp/', '/');
       });
     };
 
     try {
+      console.log('Inizio caricamento immagini per i fumetti:', comicsData);
       const comicsWithDimensions = await Promise.all(
         comicsData.map(async (comic) => {
-          const img = await loadImage(comic.spineImage);
-          const dimensions = {
-            width: img.naturalWidth,
-            height: img.naturalHeight,
-            aspectRatio: img.naturalWidth / img.naturalHeight
-          };
-          console.log(`Dimensioni salvate per ${comic.title}:`, dimensions);
-          return {
-            ...comic,
-            dimensions
-          };
+          try {
+            console.log(`Caricamento immagine per ${comic.title}:`, comic.spineImage);
+            const img = await loadImage(comic.spineImage);
+            const dimensions = {
+              width: img.naturalWidth,
+              height: img.naturalHeight,
+              aspectRatio: img.naturalWidth / img.naturalHeight
+            };
+            console.log(`✅ Dimensioni salvate per ${comic.title}:`, dimensions);
+            return {
+              ...comic,
+              dimensions
+            };
+          } catch (error) {
+            console.error(`❌ Errore nel caricamento dell'immagine per ${comic.title}:`, error);
+            return comic;
+          }
         })
       );
+      console.log('Fumetti con dimensioni:', comicsWithDimensions);
       setComics(comicsWithDimensions);
     } catch (error) {
       console.error('Errore nel caricamento delle dimensioni delle immagini:', error);

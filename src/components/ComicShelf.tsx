@@ -364,7 +364,8 @@ export default function ComicShelf() {
                       e.stopPropagation();
                       console.log('Apertura link:', selectedComic.file);
                       if (selectedComic.file) {
-                        window.location.href = selectedComic.file;
+                        // Forza l'apertura in una nuova finestra con tutti i parametri necessari
+                        window.open(selectedComic.file, '_blank', 'noopener,noreferrer');
                       }
                     }}
                     className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"

@@ -89,7 +89,7 @@ export async function GET(request: Request) {
         status: 200,
         headers: headers
       });
-    } catch (fetchError) {
+    } catch (fetchError: any) {
       clearTimeout(timeoutId);
       if (fetchError.name === 'AbortError') {
         console.error(`[${new Date().toISOString()}] Timeout durante il download:`, {

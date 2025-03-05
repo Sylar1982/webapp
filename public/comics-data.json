@@ -3,17 +3,32 @@
     {
       "id": "0001",
       "title": "Vendicatori 1",
-      "file": "http://www.gamecaffe.net/Comics/0001_Vendicatori_001.cbz"
+      "file": "http://www.gamecaffe.net/Comics/0001_Vendicatori_001.cbz",
+      "coverImage": "/images/Comics/0001COP_Vendicatori_1.jpg",
+      "spineImage": "/images/Comics/0001COS_Vendicatori_1.jpg",
+      "spineColor": "#8B0000",
+      "shelf": 0,
+      "position": 0
     },
     {
       "id": "0002",
       "title": "Vendicatori 2",
-      "file": null
+      "file": null,
+      "coverImage": "/images/Comics/0002COP_Vendicatori_2.jpg",
+      "spineImage": "/images/Comics/0002COS_Vendicatori_2.jpg",
+      "spineColor": "#8B0000",
+      "shelf": 0,
+      "position": 1
     },
     {
       "id": "0003",
       "title": "Omnibus Rom 01",
-      "file": null
+      "file": null,
+      "coverImage": "/images/Comics/0003COP_OmnibusRom01_001.JPG",
+      "spineImage": "/images/Comics/0003COSOmnibusRom01_724.jpg",
+      "spineColor": "#4B0082",
+      "shelf": 0,
+      "position": 2
     }
   ]
 } 

@@ -132,7 +132,9 @@ export default function ComicShelf() {
     
     // Se abbiamo le dimensioni dell'immagine, usa quelle per calcolare la larghezza proporzionale
     if (comic.dimensions) {
-      const width = baseHeight * comic.dimensions.aspectRatio;
+      // Calcoliamo la larghezza mantenendo l'aspect ratio dell'immagine originale
+      // ma riduciamo la larghezza di base a 1/3
+      const width = (baseHeight * comic.dimensions.aspectRatio) / 3;
       return {
         height: baseHeight * baseMultiplier,
         width: width * baseMultiplier
@@ -142,7 +144,7 @@ export default function ComicShelf() {
     // Fallback alle dimensioni di default se non abbiamo le dimensioni dell'immagine
     return {
       height: baseHeight * baseMultiplier,
-      width: 15 * baseMultiplier
+      width: (shelf.width / 3) * baseMultiplier // Riduciamo anche la larghezza di default
     };
   };
 
